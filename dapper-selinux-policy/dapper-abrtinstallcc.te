@@ -1,0 +1,10 @@
+
+module dapper-abrtinstallcc 1.0;
+
+require {
+	type abrt_t;
+	class capability sys_admin;
+}
+
+#============= abrt_t ==============
+allow abrt_t self:capability sys_admin;

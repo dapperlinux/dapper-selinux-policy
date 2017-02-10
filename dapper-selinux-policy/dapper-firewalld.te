@@ -1,0 +1,10 @@
+
+module dapper-firewalld 1.0;
+
+require {
+	type firewalld_t;
+	class process execmem;
+}
+
+#============= firewalld_t ==============
+allow firewalld_t self:process execmem;
