@@ -1,0 +1,9 @@
+module dapper-spicevdagentd 1.0;
+
+require {
+        type vdagent_t;
+        class capability dac_read_search;
+}
+
+#============= vdagent_t ==============
+allow vdagent_t self:capability dac_read_search;

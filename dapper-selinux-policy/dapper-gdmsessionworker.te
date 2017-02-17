@@ -1,0 +1,10 @@
+module dapper-gdmsessionworker 1.0;
+
+require {
+        type xdm_t;
+        type kernel_t;
+        class key view;
+}
+
+#============= xdm_t ==============
+allow xdm_t kernel_t:key view;
