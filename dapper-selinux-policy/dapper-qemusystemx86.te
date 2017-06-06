@@ -1,0 +1,10 @@
+
+module dapper-qemusystemx86 1.0;
+
+require {
+	type svirt_t;
+	class process execmem;
+}
+
+#============= svirt_t ==============
+allow svirt_t self:process execmem;

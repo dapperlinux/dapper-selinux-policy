@@ -1,6 +1,6 @@
 Name:			dapper-selinux-policy
-Version:		0.1
-Release:		2
+Version:		1
+Release:		3
 License:		GPLv3
 Group:			System Environment/Base
 Summary:		SELinux Policies for Dapper Linux
@@ -9,7 +9,7 @@ URL:			https://github.com/dapperlinux/dapper-selinux-policy
 Requires(post):	selinux-policy-base, selinux-policy-targeted, policycoreutils, policycoreutils-python libselinux-utils
 BuildRequires:	selinux-policy selinux-policy-devel
  
-Source0:		%{name}-%{version}.tar.gz
+Source0:		%{name}-%{version}.tar.xz
  
 %description
 Dapper Linux requires some custom SELinux configuration that migrates from further hardening provided by grsecurity. This package addresses these issues.
@@ -26,6 +26,7 @@ install -m 0644 dapper-abrtinstallcc.pp.bz2 %{buildroot}%{_datadir}/selinux/pack
 install -m 0644 dapper-firewalld.pp.bz2 %{buildroot}%{_datadir}/selinux/packages
 install -m 0644 dapper-gdmsessionworker.pp.bz2 %{buildroot}%{_datadir}/selinux/packages
 install -m 0644 dapper-spicevdagentd.pp.bz2 %{buildroot}%{_datadir}/selinux/packages
+install -m 0644 dapper-qemusystemx86.pp.bz2 %{buildroot}%{_datadir}/selinux/packages
  
 %post
 # Load the modules
@@ -33,6 +34,7 @@ install -m 0644 dapper-spicevdagentd.pp.bz2 %{buildroot}%{_datadir}/selinux/pack
 %{_sbindir}/semodule -n -s targeted -i %{_datadir}/selinux/packages/dapper-firewalld.pp.bz2
 %{_sbindir}/semodule -n -s targeted -i %{_datadir}/selinux/packages/dapper-gdmsessionworker.pp.bz2
 %{_sbindir}/semodule -n -s targeted -i %{_datadir}/selinux/packages/dapper-spicevdagentd.pp.bz2
+%{_sbindir}/semodule -n -s targeted -i %{_datadir}/selinux/packages/dapper-qemusystemx86.pp.bz2
 # Reload SELinux policy
 if %{_sbindir}/selinuxenabled ; then
     %{_sbindir}/load_policy
@@ -45,6 +47,7 @@ fi
 %{_sbindir}/semodule -n -r dapper-firewalld &amp;&gt; /dev/null || :
 %{_sbindir}/semodule -n -r dapper-gdmsessionworker &amp;&gt; /dev/null || :
 %{_sbindir}/semodule -n -r dapper-spicevdagentd &amp;&gt; /dev/null || :
+%{_sbindir}/semodule -n -r dapper-qemusystemx86 &amp;&gt; /dev/null || :
 # Reload SELinux policy
 if %{_sbindir}/selinuxenabled ; then
 	%{_sbindir}/load_policy
@@ -55,6 +58,9 @@ fi
 %attr(0644,root,root) %{_datadir}/selinux/packages/*.pp.bz2
  
 %changelog
+* Tue Jun  6 2017 Matthew Ruffell <msr50@uclive.ac.nz>
+- Addition of qemusystemx86 SELinux rules
+
 * Fri Feb 17 2017 Matthew Ruffell <msr50@uclive.ac.nz>
 - Addition of gdmsessionworker and spicevdagentd SELinux rules
 
