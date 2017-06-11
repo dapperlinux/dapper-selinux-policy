@@ -1,6 +1,6 @@
 Name:			dapper-selinux-policy
 Version:		1
-Release:		3
+Release:		4
 License:		GPLv3
 Group:			System Environment/Base
 Summary:		SELinux Policies for Dapper Linux
@@ -42,15 +42,18 @@ fi
  
  
 %postun
+# Only remove modules if the package is being uninstalled, and not upgraded.
+if [$1 -eq 0]; then
 # Remove modules
-%{_sbindir}/semodule -n -r dapper-abrtinstallcc &amp;&gt; /dev/null || :
-%{_sbindir}/semodule -n -r dapper-firewalld &amp;&gt; /dev/null || :
-%{_sbindir}/semodule -n -r dapper-gdmsessionworker &amp;&gt; /dev/null || :
-%{_sbindir}/semodule -n -r dapper-spicevdagentd &amp;&gt; /dev/null || :
-%{_sbindir}/semodule -n -r dapper-qemusystemx86 &amp;&gt; /dev/null || :
+%{_sbindir}/semodule -n -r dapper-abrtinstallcc &> /dev/null || :
+%{_sbindir}/semodule -n -r dapper-firewalld &> /dev/null || :
+%{_sbindir}/semodule -n -r dapper-gdmsessionworker &> /dev/null || :
+%{_sbindir}/semodule -n -r dapper-spicevdagentd &> /dev/null || :
+%{_sbindir}/semodule -n -r dapper-qemusystemx86 &> /dev/null || :
 # Reload SELinux policy
 if %{_sbindir}/selinuxenabled ; then
 	%{_sbindir}/load_policy
+fi
 fi
  
 %files
