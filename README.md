@@ -17,12 +17,12 @@ Next, setup rpmbuild directories with
 ```bash
 $ rpmdev-setuptree
 ```
-And place the file dapper-selinux-policy.spec in the SPECS directory, and rename the dapper-selinux-policy directory to dapper-selinux-policy-0.1 and compress it:
+And place the file dapper-selinux-policy.spec in the SPECS directory, and rename the dapper-selinux-policy directory to dapper-selinux-policy-1 and compress it:
 ```bash
 $ mv dapper-selinux-policy.spec ~/rpmbuild/SPECS/
-$ mv dapper-selinux-policy dapper-selinux-policy-0.1
-$ tar -czvf dapper-selinux-policy-0.1.tar.gz dapper-selinux-policy-0.1
-$ mv dapper-selinux-policy-0.1.tar.gz ~/rpmbuild/SOURCES/
+$ mv dapper-selinux-policy dapper-selinux-policy-1
+$ tar -cJvf dapper-selinux-policy-1.tar.xz dapper-selinux-policy-1
+$ mv dapper-selinux-policy-1.tar.xz ~/rpmbuild/SOURCES/
 ```
 
 and finally, you can build RPMs and SRPMs with:
