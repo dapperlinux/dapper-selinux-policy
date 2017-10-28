@@ -1,6 +1,6 @@
 Name:			dapper-selinux-policy
 Version:		1
-Release:		4
+Release:		5
 License:		GPLv3
 Group:			System Environment/Base
 Summary:		SELinux Policies for Dapper Linux

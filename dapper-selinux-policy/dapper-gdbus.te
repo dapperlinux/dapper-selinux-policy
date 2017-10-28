@@ -1,0 +1,11 @@
+
+module dapper-gdbus 1.0;
+
+require {
+	type home_root_t;
+	type colord_t;
+	class file read;
+}
+
+#============= colord_t ==============
+allow colord_t home_root_t:file read;
