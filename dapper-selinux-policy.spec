@@ -1,6 +1,6 @@
 Name:			dapper-selinux-policy
 Version:		1
-Release:		5
+Release:		6
 License:		GPLv3
 Group:			System Environment/Base
 Summary:		SELinux Policies for Dapper Linux
@@ -27,6 +27,7 @@ install -m 0644 dapper-firewalld.pp.bz2 %{buildroot}%{_datadir}/selinux/packages
 install -m 0644 dapper-gdmsessionworker.pp.bz2 %{buildroot}%{_datadir}/selinux/packages
 install -m 0644 dapper-spicevdagentd.pp.bz2 %{buildroot}%{_datadir}/selinux/packages
 install -m 0644 dapper-qemusystemx86.pp.bz2 %{buildroot}%{_datadir}/selinux/packages
+install -m 0644 dapper-gdbus.pp.bz2 %{buildroot}%{_datadir}/selinux/packages
  
 %post
 # Load the modules
@@ -35,6 +36,7 @@ install -m 0644 dapper-qemusystemx86.pp.bz2 %{buildroot}%{_datadir}/selinux/pack
 %{_sbindir}/semodule -n -s targeted -i %{_datadir}/selinux/packages/dapper-gdmsessionworker.pp.bz2
 %{_sbindir}/semodule -n -s targeted -i %{_datadir}/selinux/packages/dapper-spicevdagentd.pp.bz2
 %{_sbindir}/semodule -n -s targeted -i %{_datadir}/selinux/packages/dapper-qemusystemx86.pp.bz2
+%{_sbindir}/semodule -n -s targeted -i %{_datadir}/selinux/packages/dapper-gdbus.pp.bz2
 # Reload SELinux policy
 if %{_sbindir}/selinuxenabled ; then
     %{_sbindir}/load_policy
@@ -50,6 +52,7 @@ if [$1 -eq 0]; then
 %{_sbindir}/semodule -n -r dapper-gdmsessionworker &> /dev/null || :
 %{_sbindir}/semodule -n -r dapper-spicevdagentd &> /dev/null || :
 %{_sbindir}/semodule -n -r dapper-qemusystemx86 &> /dev/null || :
+%{_sbindir}/semodule -n -r dapper-gdbus &> /dev/null || :
 # Reload SELinux policy
 if %{_sbindir}/selinuxenabled ; then
 	%{_sbindir}/load_policy
