@@ -1,0 +1,11 @@
+
+module dapper-colord 1.0;
+
+require {
+	type colord_t;
+	type home_root_t;
+	class file getattr;
+}
+
+#============= colord_t ==============
+allow colord_t home_root_t:file getattr;

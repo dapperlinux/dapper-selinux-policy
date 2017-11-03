@@ -1,7 +1,7 @@
 # Build Dapper Linux Specific SELinux Policy
 # type "make" to build
 
-all: dapper-abrtinstallcc.pp.bz2 dapper-firewalld.pp.bz2 dapper-gdmsessionworker.pp.bz2 dapper-spicevdagentd.pp.bz2 dapper-qemusystemx86.pp.bz2 dapper-gdbus.pp.bz2
+all: dapper-abrtinstallcc.pp.bz2 dapper-firewalld.pp.bz2 dapper-gdmsessionworker.pp.bz2 dapper-spicevdagentd.pp.bz2 dapper-qemusystemx86.pp.bz2 dapper-gdbus.pp.bz2 dapper-colord.pp.bz2
 
 dapper-abrtinstallcc.pp.bz2: dapper-abrtinstallcc.pp
 	@echo Compressing $^ -\ dapper-abrtinstallcc.pp
@@ -27,6 +27,10 @@ dapper-gdbus.pp.bz2: dapper-gdbus.pp
 	@echo Compressing $^ -\ dapper-gdbus.pp
 	bzip2 -9 $^
 
+dapper-colord.pp.bz2: dapper-colord.pp
+	@echo Compressing $^ -\ dapper-colord.pp
+	bzip2 -9 $^
+
 dapper-abrtinstallcc.pp: dapper-abrtinstallcc.te
 	checkmodule -M -m -o dapper-abrtinstallcc.mod dapper-abrtinstallcc.te
 	semodule_package -o dapper-abrtinstallcc.pp -m dapper-abrtinstallcc.mod
@@ -50,6 +54,10 @@ dapper-qemusystemx86.pp: dapper-qemusystemx86.te
 dapper-gdbus.pp: dapper-gdbus.te
 	checkmodule -M -m -o dapper-gdbus.mod dapper-gdbus.te
 	semodule_package -o dapper-gdbus.pp -m dapper-gdbus.mod
+
+dapper-colord.pp: dapper-colord.te
+	checkmodule -M -m -o dapper-colord.mod dapper-colord.te
+	semodule_package -o dapper-colord.pp -m dapper-colord.mod
 
 clean:
 	rm -f *~ *.tc *.pp *.pp.bz2 *.mod
